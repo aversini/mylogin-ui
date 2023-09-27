@@ -3,10 +3,12 @@ import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { isBasicAuth } from "./common/utilities";
 import { getConfig } from "./config";
-import App from "./modules/App/App";
+import { App } from "./modules/App/App";
+import { Edit } from "./modules/Edit/Edit";
 
 const config = getConfig();
 
@@ -19,14 +21,29 @@ const providerConfig = {
 	},
 };
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-	<React.StrictMode>
-		{isBasicAuth ? (
-			<App />
-		) : (
-			<Auth0Provider {...providerConfig}>
-				<App />
-			</Auth0Provider>
-		)}
-	</React.StrictMode>,
-);
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <App />,
+	},
+	{
+		path: "/edit",
+		element: <Edit />,
+	},
+]);
+
+const root = document.getElementById("root");
+
+if (root) {
+	ReactDOM.createRoot(root).render(
+		<React.StrictMode>
+			{isBasicAuth ? (
+				<RouterProvider router={router} />
+			) : (
+				<Auth0Provider {...providerConfig}>
+					<RouterProvider router={router} />
+				</Auth0Provider>
+			)}
+		</React.StrictMode>,
+	);
+}

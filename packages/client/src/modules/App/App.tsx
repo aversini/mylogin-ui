@@ -14,7 +14,7 @@ import { Shortcuts } from "../Shortcuts/Shortcuts";
 import { AppContext } from "./AppContext";
 import { reducer } from "./reducer";
 
-function App() {
+export const App = () => {
 	const storage = useLocalStorage();
 	const [basicAuth, setBasicAuth] = useState(
 		storage.get(LOCAL_STORAGE_BASIC_AUTH),
@@ -187,6 +187,4 @@ function App() {
 			<Footer />
 		</AppContext.Provider>
 	);
-}
-
-export default App;
+};
