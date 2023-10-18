@@ -9,6 +9,7 @@ import { isBasicAuth } from "./common/utilities";
 import { getConfig } from "./config";
 import { App } from "./modules/App/App";
 import { Edit } from "./modules/Edit/Edit";
+import { Shortcuts } from "./modules/Shortcuts/Shortcuts";
 
 const config = getConfig();
 
@@ -25,7 +26,14 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
+		children: [
+			{
+				path: "/shortcuts",
+				element: <Shortcuts />,
+			},
+		],
 	},
+
 	{
 		path: "/edit",
 		element: <Edit />,

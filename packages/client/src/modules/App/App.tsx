@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useReducer, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 import {
 	ACTION_GET_DATA,
@@ -16,7 +17,6 @@ import {
 } from "../../common/strings";
 import { isBasicAuth, isDev, serviceCall } from "../../common/utilities";
 import { Button, Footer, Main, TextInput } from "../../components";
-import { Shortcuts } from "../Shortcuts/Shortcuts";
 import { AppContext } from "./AppContext";
 import { reducer } from "./reducer";
 
@@ -238,13 +238,15 @@ export const App = () => {
 	}
 
 	/**
-	 * Authentication is handled by Auth0 and the user is
-	 * fully authenticated. We can show the app.
+	 * At this point, the user is fully authenticated.
+	 * We can show the app.
 	 */
+
 	return (
 		<AppContext.Provider value={{ state, dispatch }}>
 			<Main>
-				<Shortcuts />
+				{/* <Shortcuts /> */}
+				<Outlet />
 			</Main>
 			<Footer />
 		</AppContext.Provider>
