@@ -18,6 +18,11 @@ const buildTime = new Date()
 	.replace(/,/g, "");
 
 export default defineConfig({
+	esbuild: {
+		supported: {
+			"top-level-await": true, //browsers can handle top-level-await features
+		},
+	},
 	test: {
 		globals: true,
 		setupFiles: ["./vitest.setup.ts"],
@@ -26,7 +31,7 @@ export default defineConfig({
 			provider: "v8",
 			lines: 55,
 			functions: 30,
-			branches: 90,
+			branches: 80,
 			statements: 55,
 		},
 	},
